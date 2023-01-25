@@ -1,0 +1,13 @@
+<div class="form-four-container">
+  <h1 class="main-title">Campaign Summary</h1>
+
+  <app-summary [dataSource]="data.locationDetails" [form1]="data.campaignDetails" [form3]="data.audience"></app-summary>
+
+  <div class="save-btn">
+    <button class="primary-btn" mat-button  (click)="onclose()">
+      Close
+    </button>
+  </div>
+
+</div>
+

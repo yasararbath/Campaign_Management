@@ -1,0 +1,9 @@
+::ng-deep{
+    .cdk-overlay-connected-position-bounding-box:has(.mat-drop-remove){
+        display: none;
+    }
+}
+
+.display_flex {
+    display: flex;
+}

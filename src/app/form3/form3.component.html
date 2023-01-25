@@ -1,0 +1,60 @@
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Audience
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+  <mat-card-content>
+    <form class="example-form" >
+      <div class="display_flex">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Search"  [formControl]="search_val" [ngModel]="search_input">
+      </mat-form-field>
+          <button
+          mat-button
+          class="dropdown"
+          #mySelect
+          #levelOneTrigger="matMenuTrigger" 
+          [matMenuTriggerFor]="levelOne" 
+          (click)="levelOneTrigger.openMenu()"
+          >Browse
+          <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+      </div>
+      <mat-menu #levelOne="matMenu" direction="down" yPosition="below">
+        <ng-container *ngFor="let menuItem of modulesList; let i = index">   
+        <span (mouseleave)="levelOneTrigger.closeMenu()"></span>
+        <ng-container>
+            <li mat-menu-item [matMenuTriggerFor]="levelTwo">
+              <span>{{menuItem.label}}</span>
+              </li>
+              <mat-menu #levelTwo="matMenu">
+                  <ng-container *ngFor="let child2 of menuItem.children; let j = index">
+                    <button mat-menu-item [matMenuTriggerFor]="levelThree">
+                    {{child2.label}}
+                    </button>
+                    <mat-menu #levelThree="matMenu">
+                  <ng-container *ngFor="let child3 of child2.children; let k = index">
+                    <button mat-menu-item [value]="child3.label" (click)="onDropdownItemSelected($event)" [ngClass]="{'selectedMenu': child3.label === selectedClassification}">
+                      <mat-checkbox [name]="'child3' + i + j + k" class="mat-menu-item" [(ngModel)]="child3.checked">{{child3.label}}</mat-checkbox>  
+                    </button>
+                  </ng-container>
+              </mat-menu>
+                  </ng-container>
+              </mat-menu>
+      </ng-container>
+    </ng-container>
+    </mat-menu>
+    
+    <div class="flex-ui example-full-width">
+      <button mat-button (click)="back()" class="dull-btn">Back</button>
+        <button mat-button (click)="sendForm()" class="primary-btn">Next</button>
+    </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+</mat-expansion-panel>
+</mat-accordion>
